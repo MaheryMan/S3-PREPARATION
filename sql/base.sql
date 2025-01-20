@@ -1,6 +1,6 @@
 -- Création de la base de données
 CREATE DATABASE IF NOT EXISTS airbnb;
-USE location_saisonniere;
+USE airbnb;
 
 -- Table des utilisateurs (clients et admin)
 CREATE TABLE users (
@@ -26,7 +26,7 @@ CREATE TABLE habitations (
     loyer_jour DECIMAL(10,2) NOT NULL,
     quartier VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    FOREIGN KEY (type_id) REFERENCES types_habitation(id)
+    FOREIGN KEY (type_id) REFERENCES types_habitations(id)
 );
 
 -- Table des photos

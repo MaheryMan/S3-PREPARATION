@@ -41,6 +41,10 @@ class LoginModel{
             return false;
         }
     }
+
+    public function loginAdmin($nom, $motsDePasse){
+
+    }
     public function inscription($email, $password, $nom, $telephone) {
         // Vérification si l'utilisateur existe déjà
         $checkQuery = "SELECT COUNT(*) FROM users WHERE email = :email";

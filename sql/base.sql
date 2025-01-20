@@ -8,8 +8,12 @@ CREATE TABLE users (
     email VARCHAR(100) UNIQUE NOT NULL,
     nom VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    telephone VARCHAR(20) NOT NULL,
-    is_admin BOOLEAN DEFAULT FALSE
+    telephone VARCHAR(20) NOT NULL
+);
+CREATE TABLE admin (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL
 );
 
 -- Table des types d'habitation

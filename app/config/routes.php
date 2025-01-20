@@ -1,10 +1,7 @@
 <?php
 
-use app\controllers\ApiExampleController;
-use app\controllers\TrajetController;
-use app\controllers\ChauffeurController;
+use app\controllers\HomeController;
 use app\controllers\LoginController;
-use app\controllers\VehiculeController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -17,6 +14,9 @@ use flight\net\Router;
 	$Welcome_Controller = new TrajetController($app);
 	$app->render('welcome', [ 'message' => 'It works!!' ]);
 });*/
+
+$Home_Controller = new HomeController();
+$router->get('/home', [$Home_Controller, 'home']);
 
 $loginController = new LoginController($app);
 $router->get('/', [$loginController, 'afficherPage']);

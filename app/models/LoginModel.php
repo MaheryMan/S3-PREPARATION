@@ -43,8 +43,36 @@ class LoginModel{
     }
 
     public function loginAdmin($nom, $motsDePasse){
+        try {
+            $requette = "SELECT nom, password, id FROM admins WHERE nom = :nom";
+            $stmt = $this->db->prepare($requette);
+            $stmt->execute([
+            ':nom' => $nom
+            ]);
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            if (!$admin) {
+            echo "Administrateur non trouvé.";
+            echo "nom : ".$nom;
+            return false;
+            }
+            $_SESSION['admin_id'] = $admin['id'];
+            // Vérification du mot de passe
+            if ($admin['nom'] === null) {      
+            return false;
+            }
+            if ($admin['nom'] === $nom && $admin['password'] === $motsDePasse) {
+            return true;
+            } else {
+            return false;
+            }
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            echo "Erreur : " . $e->getMessage();
+            return false;
+        }
     }
+
     public function inscription($email, $password, $nom, $telephone) {
         // Vérification si l'utilisateur existe déjà
         $checkQuery = "SELECT COUNT(*) FROM users WHERE email = :email";

@@ -22,3 +22,6 @@ $loginController = new LoginController($app);
 $router->get('/', [$loginController, 'afficherPage']);
 $router->post('/login', [$loginController, 'login']);
 $router->post('/register', [$loginController, 'inscription']);
+
+$router->post('/loginAdmin', [$loginController, 'loginAdminController']);
+$router->get('/adminForm', [$loginController, 'afficherLoginAdmin']);

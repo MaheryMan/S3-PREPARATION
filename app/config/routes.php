@@ -2,6 +2,7 @@
 
 use app\controllers\HomeController;
 use app\controllers\LoginController;
+use app\controllers\AdminController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -16,6 +17,8 @@ use flight\net\Router;
 });*/
 
 $Home_Controller = new HomeController();
+$adminController = new AdminController($app);
+
 $router->get('/home', [$Home_Controller, 'home']);
 
 $loginController = new LoginController($app);
@@ -25,3 +28,6 @@ $router->post('/register', [$loginController, 'inscription']);
 
 $router->post('/loginAdmin', [$loginController, 'loginAdminController']);
 $router->get('/adminForm', [$loginController, 'afficherLoginAdmin']);
+$router->get('/admin', [$adminController, 'listerHabitation']);
+$router->get("/ajouter", [$adminController, 'formHabitation']);
+$router->post("/ajouter", [$adminController, 'addHabitation']);

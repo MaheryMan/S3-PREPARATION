@@ -98,4 +98,32 @@ class AdminController
         $habitationId = $adminModel->ajouterHabitation($type, $chambres, $loyer_jour, $quartier, $description, $photos);
         Flight::redirect('/ajouter');
     }
+    public function modifForm(){
+        $this->model = new AdminModel(Flight::db());
+        $id = Flight::request()->data->habitation_id ?? null;
+        $id = Flight::request()->data->habitation_id ?? null;
+        $habitation = $this->model->getHabitation($id);
+        $types = $this->model->getTypeHabitation();
+        $photos = $this->model->getPhotosbyId($id);
+        $data = ['page' => 'modification', 'habitation' => $habitation, 'types' => $types, 'photos'=> $photos];
+        Flight::render('templateAdmin', $data);
+    }
+    public function supprimerPhoto(){
+        $this->model = new AdminModel(Flight::db());
+        $photo_id = Flight::request()->data->photo_id ?? null;
+        $habitation_id = Flight::request()->data->habitation_id ?? null;
+    
+        // Get photo path before deletion to delete file
+        $photoUrl = $this->model->getUrlPhoto($photo_id);
+        if ($photoUrl && file_exists($photoUrl)) {
+            unlink($photoUrl); // Delete physical file
+        }
+    
+        // Delete from database
+        if ($this->model->supprimerPhoto($photo_id)) {
+            Flight::redirect('/modifier?habitation_id=' . $habitation_id);
+        } else {
+            Flight::redirect('/modifier?habitation_id=' . $habitation_id);
+        }
+    }
 }

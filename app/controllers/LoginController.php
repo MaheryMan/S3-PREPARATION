@@ -28,6 +28,25 @@ class LoginController
             Flight::render('login', ['message' => 'Identifiants incorrects']);
         }
     }
+
+    public function loginAdminController(){
+        $this->model = new LoginModel(Flight::db());
+        $nom = Flight::request()->data->nom;
+        $password = Flight::request()->data->password;
+
+        if ($this->model->loginAdmin($nom, $password)) {
+            $_SESSION['nom'] = $nom;
+
+            Flight::redirect('/admin');
+        } else {
+            Flight::render('login', ['message' => 'Identifiants incorrects']);
+        }
+    }
+    // Mahery Code
+
+    public function afficherLoginAdmin(){
+        Flight::render('loginAdmin');
+    }
     public function inscription()
     {
         session_start();

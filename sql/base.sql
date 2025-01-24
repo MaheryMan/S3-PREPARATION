@@ -52,11 +52,5 @@ CREATE TABLE reservations (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Insertion des types d'habitation de base
-INSERT INTO types_habitations (nom) VALUES
-('Maison'),
-('Studio'),
-('Appartement');
-
 INSERT INTO admins (nom, password) VALUES
 ('admin', '123');

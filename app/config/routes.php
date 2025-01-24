@@ -3,6 +3,7 @@
 use app\controllers\HabitationController;
 use app\controllers\HomeController;
 use app\controllers\LoginController;
+use app\controllers\AdminController;
 use flight\Engine;
 use flight\net\Router;
 //use Flight;
@@ -17,6 +18,8 @@ use flight\net\Router;
 });*/
 
 $Home_Controller = new HomeController();
+$adminController = new AdminController($app);
+
 $router->get('/home', [$Home_Controller, 'home']);
 
 $loginController = new LoginController($app);
@@ -31,3 +34,12 @@ $router->group('/habitations', function () use ($router, $Habitation_Controller)
 	$router->post('/check', [$Habitation_Controller, 'checkAvailability']);
 	$router->post('/reserve', [$Habitation_Controller, 'reserveHabitation']);
 });
+$router->post('/loginAdmin', [$loginController, 'loginAdminController']);
+$router->get('/adminForm', [$loginController, 'afficherLoginAdmin']);
+$router->get('/admin', [$adminController, 'listerHabitation']);
+$router->get("/ajouter", [$adminController, 'formHabitation']);
+$router->post("/ajouter", [$adminController, 'addHabitation']);
+$router->post("/modifier", [$adminController, 'modifForm']);
+$router->post("/modification", [$adminController, 'modifierHabitation']);
+$router->post("/supprimerPhoto", [$adminController, 'supprimerPhoto']);
+$router->post("/supprimer", [$adminController, 'supprimerHabitation']);

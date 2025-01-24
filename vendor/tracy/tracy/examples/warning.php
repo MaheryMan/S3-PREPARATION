@@ -12,7 +12,7 @@ Debugger::enable(Debugger::Detect, __DIR__ . '/log');
 Debugger::$strictMode = true;
 
 ?>
-<!DOCTYPE html><link rel="stylesheet" href="assets/style.css">
+<!DOCTYPE html><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 
 <h1>Tracy Warning and StrictMode demo</h1>
 

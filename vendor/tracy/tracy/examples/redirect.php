@@ -21,7 +21,7 @@ if (empty($_GET['redirect'])) {
 bdump('after redirect ' . date('H:i:s'));
 
 ?>
-<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="assets/style.css">
+<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 
 <h1>Tracy: redirect demo</h1>
 

@@ -3,7 +3,7 @@
 <p>L'habitation est disponible du <?= $startDate ?> au <?= $endDate ?>.</p>
 <p>Voulez-vous confirmer la réservation ?</p>
 
-<form action="/habitations/reserve" method="POST">
+<form action="<?= BASE_URL ?>/habitations/reserve" method="POST">
     <input type="hidden" name="habitationId" value="<?= $habitationId ?>" />
     <input type="hidden" name="startDate" value="<?= $startDate ?>" />
     <input type="hidden" name="endDate" value="<?= $endDate ?>" />

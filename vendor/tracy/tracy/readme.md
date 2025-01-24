@@ -368,7 +368,7 @@ The solution is to place `<?php Tracy\Debugger::renderLoader() ?>` into your tem
 <head>
 	<title>...<title>
 	<?php Tracy\Debugger::renderLoader() ?>
-	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 ```

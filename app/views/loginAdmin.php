@@ -112,7 +112,7 @@ button:active {
 <body>
     <div class="login-container">
         <h2>Admin Login</h2>
-        <form action="/loginAdmin" method="POST">
+        <form action="<?= BASE_URL ?>/loginAdmin" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="nom" required>

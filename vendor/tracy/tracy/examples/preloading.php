@@ -18,7 +18,7 @@ if (isset($_GET['sleep'])) {
 }
 
 ?>
-<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="assets/style.css">
+<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 
 <h1>Tracy: Preloading</h1>
 

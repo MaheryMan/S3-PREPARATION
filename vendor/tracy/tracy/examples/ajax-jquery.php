@@ -27,7 +27,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) { // AJAX request
 bdump('classic request ' . date('H:i:s'));
 
 ?>
-<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="assets/style.css">
+<!DOCTYPE html><html class=arrow><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 
 <h1>Tracy: AJAX demo</h1>
 

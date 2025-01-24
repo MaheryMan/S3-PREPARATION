@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Template</title>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/admin.css">
 </head>
 <body>
     <header>
         <h1>Admin Dashboard</h1>
         <nav>
             <ul>
-                <li><a href="/admin">Lister</a></li>
-                <li><a href="/ajouter">Ajouter</a></li>
+                <li><a href="<?= BASE_URL ?>/admin">Lister</a></li>
+                <li><a href="<?= BASE_URL ?>/ajouter">Ajouter</a></li>
             </ul>
         </nav>
     </header>

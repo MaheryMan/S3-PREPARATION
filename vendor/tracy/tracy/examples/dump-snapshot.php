@@ -12,7 +12,7 @@ use Tracy\Dumper;
 Debugger::enable(Debugger::Detect, __DIR__ . '/log');
 
 ?>
-<!DOCTYPE html><link rel="stylesheet" href="assets/style.css">
+<!DOCTYPE html><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">
 
 <h1>Tracy: Dumper with common snapshot demo</h1>
 

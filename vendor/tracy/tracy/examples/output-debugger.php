@@ -9,7 +9,7 @@ Tracy\OutputDebugger::enable();
 
 function head()
 {
-	echo '<!DOCTYPE html><link rel="stylesheet" href="assets/style.css">';
+	echo '<!DOCTYPE html><link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/style.css">';
 }
 
 

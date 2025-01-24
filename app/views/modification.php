@@ -1,6 +1,6 @@
 <div class="form-container">
     <h2>Modifier une habitation</h2>
-    <form action="/modification" method="POST" enctype="multipart/form-data">
+    <form action="<?= BASE_URL ?>/modification" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="type">Type d'habitation:</label>
             <select name="type_id" id="type" required>
@@ -49,8 +49,8 @@
             <div class="photos-grid">
                 <?php foreach ($photos as $photo): ?>
                     <div class="photo-item">
-                        <img src="<?php echo htmlspecialchars($photo['url_photo']); ?>" alt="Photo habitation">
-                        <form action="/supprimerPhoto" method="POST" class="delete-photo-form">
+                        <img src="<?= BASE_URL ?>/public/<?php echo htmlspecialchars($photo['url_photo']); ?>" alt="Photo habitation">
+                        <form action="<?= BASE_URL ?>/supprimerPhoto" method="POST" class="delete-photo-form">
                             <input type="hidden" name="photo_id" value="<?php echo htmlspecialchars($photo['id']); ?>">
                             <input type="hidden" name="habitation_id" value="<?php echo htmlspecialchars($habitation['id']); ?>">
                         <button type="submit" class="delete-photo-btn">Supprimer</button>

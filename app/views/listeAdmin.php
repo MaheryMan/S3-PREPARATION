@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <?php if (!empty($habitation['url_photo'])): ?>
-                            <img src="<?php echo htmlspecialchars($habitation['url_photo']);?>" width="100">
+                            <img src="<?= BASE_URL ?>/public/<?php echo htmlspecialchars($habitation['url_photo']);?>" width="100">
                         <?php else: ?>
                             Pas de photo
                         <?php endif; ?>
@@ -26,11 +26,11 @@
                     <td><?php echo htmlspecialchars($habitation['quartier']); ?></td>
                     <td>
     <div class="button-group">
-        <form action="/modifier" method="POST" style="display: inline-block; margin-right: 5px;">
+        <form action="<?= BASE_URL ?>/modifier" method="POST" style="display: inline-block; margin-right: 5px;">
             <input type="hidden" name="habitation_id" value="<?php echo htmlspecialchars($habitation['id']); ?>">
             <button type="submit" class="modify-btn">Modifier</button>
         </form>
-        <form action="/supprimer" method="POST" style="display: inline-block;">
+        <form action="<?= BASE_URL ?>/supprimer" method="POST" style="display: inline-block;">
             <input type="hidden" name="habitation_id" value="<?php echo htmlspecialchars($habitation['id']); ?>">
             <button type="submit" class="delete-btn">Supprimer</button>
         </form>

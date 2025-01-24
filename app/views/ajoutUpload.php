@@ -1,7 +1,7 @@
 <div class="formulaire">
     <h1>Ajouter une nouvelle habitation</h1>
 
-    <form action="/ajouter" method="POST" enctype="multipart/form-data">
+    <form action="<?= BASE_URL ?>/ajouter" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="type">Type d'habitation:</label>
             <select name="type_id" id="type" required>

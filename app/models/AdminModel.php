@@ -101,7 +101,7 @@ class AdminModel
         ");
         try {
             $this->db->beginTransaction();
-            $stmt->execute([$typeId, $nbChambres, $loyerJour, $quartier, $description]);
+            $stmt->execute([$typeId, $nbChambres, $loyerJour, $quartier, $description, $id]);
             
             $photoStmt = $this->db->prepare("INSERT INTO photos (habitation_id, url_photo) VALUES (?, ?)");
             foreach ($url_photos as $url) {

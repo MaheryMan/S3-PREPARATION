@@ -43,7 +43,6 @@ class AdminModel
             $this->db->rollBack();
             throw $e;
         }
-        return $stmt->execute([$typeId, $nbChambres, $loyerJour, $quartier, $description]);
     }
     public function getTypeHabitation(){
         $stmt = $this->db->query("SELECT * FROM types_habitations");
@@ -68,23 +67,22 @@ class AdminModel
         $stmt = $this->db->prepare("DELETE FROM photos WHERE id = ?");
         return $stmt->execute([$id]);
     }
+
     public function supprimerHabitation($id) {
         try {
             $this->db->beginTransaction();
             
-            // Delete photos first (foreign key constraint)
+            // Delete reservations first (foreign key constraint)
+            $stmtReservations = $this->db->prepare("DELETE FROM reservations WHERE habitation_id = ?");
+            $stmtReservations->execute([$id]);
+            
+            // Delete photos (foreign key constraint)
             $stmtPhotos = $this->db->prepare("DELETE FROM photos WHERE habitation_id = ?");
             $stmtPhotos->execute([$id]);
             
             // Delete habitation
             $stmtHabitation = $this->db->prepare("DELETE FROM habitations WHERE id = ?");
             $stmtHabitation->execute([$id]);
-            
-            // Reset auto-increment to max id + 1
-            $this->db->query("ALTER TABLE habitations AUTO_INCREMENT = 1");
-            $this->db->query("SET @count = 0");
-            $this->db->query("UPDATE habitations SET id = @count:= @count + 1");
-            $this->db->query("ALTER TABLE habitations AUTO_INCREMENT = @count + 1");
             
             $this->db->commit();
             return true;
@@ -94,12 +92,25 @@ class AdminModel
         }
     }
     
-    public function modifierHabitation($id, $typeId, $nbChambres, $loyerJour, $quartier, $description){
+    public function modifierHabitation($id, $typeId, $nbChambres, $loyerJour, $quartier, $description, $url_photos) {
+
         $stmt = $this->db->prepare("
             UPDATE habitations
             SET type_id = ?, nb_chambres = ?, loyer_jour = ?, quartier = ?, description = ?
             WHERE id = ?
         ");
-        return $stmt->execute([$typeId, $nbChambres, $loyerJour, $quartier, $description, $id]);
+        try {
+            $this->db->beginTransaction();
+            $stmt->execute([$typeId, $nbChambres, $loyerJour, $quartier, $description]);
+            
+            $photoStmt = $this->db->prepare("INSERT INTO photos (habitation_id, url_photo) VALUES (?, ?)");
+            foreach ($url_photos as $url) {
+                $photoStmt->execute([$id, $url]);
+            }  
+            $this->db->commit();
+        } catch (\Exception $e) {
+            $this->db->rollBack();
+            throw $e;
+        }
     }
 }

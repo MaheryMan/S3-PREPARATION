@@ -32,5 +32,6 @@ $router->get('/admin', [$adminController, 'listerHabitation']);
 $router->get("/ajouter", [$adminController, 'formHabitation']);
 $router->post("/ajouter", [$adminController, 'addHabitation']);
 $router->post("/modifier", [$adminController, 'modifForm']);
-$router->get("/modifier", [$adminController, 'modifForm']);
+$router->get("/modification", [$adminController, 'modifierHabitation']);
 $router->post("/supprimerPhoto", [$adminController, 'supprimerPhoto']);
+$router->post("/supprimer", [$adminController, 'supprimerHabitation']);

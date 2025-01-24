@@ -13,7 +13,6 @@
             <ul>
                 <li><a href="/admin">Lister</a></li>
                 <li><a href="/ajouter">Ajouter</a></li>
-                <li><a href="logout.php">Modifier</a></li>
             </ul>
         </nav>
     </header>

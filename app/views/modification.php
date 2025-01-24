@@ -1,6 +1,6 @@
 <div class="form-container">
     <h2>Modifier une habitation</h2>
-    <form action="/modifier" method="POST" enctype="multipart/form-data">
+    <form action="/modification" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="type">Type d'habitation:</label>
             <select name="type_id" id="type" required>
@@ -36,15 +36,13 @@
         </div>
 
         <input type="hidden" name="habitation_id" value="<?php echo htmlspecialchars($habitation['id']); ?>">
-        
-        <button type="submit" class="submit-button">Enregistrer les modifications</button>
-        
 
         <div class="form-group">
             <label for="new_photos">Ajouter de nouvelles photos:</label>
             <input type="file" id="new_photos" name="photos[]" multiple accept="image/*">
         </div>
 
+        <button type="submit" class="submit-button">Enregistrer les modifications</button>
     </form>
     <div class="form-group">
             <h3>Photos actuelles</h3>

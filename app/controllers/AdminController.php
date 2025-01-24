@@ -95,13 +95,83 @@ class AdminController
         }
 
         // Ajout de l'habitation et des photos dans la base de données
-        $habitationId = $adminModel->ajouterHabitation($type, $chambres, $loyer_jour, $quartier, $description, $photos);
+        $adminModel->ajouterHabitation($type, $chambres, $loyer_jour, $quartier, $description, $photos);
         Flight::redirect('/ajouter');
     }
+
+    public static function modifierHabitation()
+    {
+        $db = Flight::db(); // Récupération de la connexion à la base de données
+        $adminModel = new AdminModel($db);
+
+        // Récupération des données du formulaire
+        $id = Flight::request()->data->habitation_id ?? null;
+        $type = Flight::request()->data->type_id ?? null;
+        $chambres = Flight::request()->data->nb_chambres ?? null;
+        $loyer_jour = Flight::request()->data->loyer_jour ?? null;
+        $quartier = Flight::request()->data->quartier ?? null;
+        $description = Flight::request()->data->description ?? null;
+
+        // Vérification des champs obligatoires
+        if (!$type || !$chambres || !$loyer_jour || !$quartier || !$description) {
+            Flight::redirect('/ajout?error=empty_fields');
+            return;
+        }
+
+        // Gestion des fichiers (photos)
+        $photos = [];
+        if (!empty($_FILES['photos']['name'][0])) {
+            $uploadDir = 'assets/images/'; // Répertoire pour stocker les images
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true); // Crée le répertoire si inexistant
+            }
+
+            foreach ($_FILES['photos']['name'] as $key => $name) {
+                $tmpName = $_FILES['photos']['tmp_name'][$key];
+                $size = $_FILES['photos']['size'][$key];
+                $extension = strrchr($name, '.'); // Récupère l'extension du fichier
+                $allowedExtensions = ['.png', '.gif', '.jpg', '.jpeg'];
+                $maxSize = 10000000; // 10 Mo
+
+                // Vérifications de l'extension et de la taille
+                if (!in_array($extension, $allowedExtensions)) {
+                    Flight::redirect('/ajout?error=invalid_file_type');
+                    return;
+                }
+
+                if ($size > $maxSize) {
+                    Flight::redirect('/ajout?error=file_too_large');
+                    return;
+                }
+
+                // Formatage du nom du fichier pour éviter les caractères spéciaux
+                $formattedName = strtr($name,
+                    'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
+                    'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy'
+                );
+                $formattedName = preg_replace('/([^.a-z0-9]+)/i', '-', $formattedName);
+
+                // Ajouter un timestamp pour éviter les conflits de noms
+                $filePath = $uploadDir . time() . '-' . $formattedName;
+
+                // Déplacement du fichier vers le répertoire cible
+                if (move_uploaded_file($tmpName, $filePath)) {
+                    $photos[] = $filePath; // Stocker le chemin relatif
+                } else {
+                    Flight::redirect('/ajout?error=upload_failed');
+                    return;
+                }
+            }
+        }
+
+        // modification de l'habitation et des photos dans la base de données
+        $adminModel->modifierHabitation($id,$type, $chambres, $loyer_jour, $quartier, $description, $photos);
+        Flight::redirect('/admin');
+    }
+
     public function modifForm(){
         $this->model = new AdminModel(Flight::db());
-        $id = Flight::request()->data->habitation_id ?? null;
-        $id = Flight::request()->data->habitation_id ?? null;
+        $id = Flight::request()->data->habitation_id ?? Flight::request()->query->habitation_id ?? null;
         $habitation = $this->model->getHabitation($id);
         $types = $this->model->getTypeHabitation();
         $photos = $this->model->getPhotosbyId($id);
@@ -124,6 +194,15 @@ class AdminController
             Flight::redirect('/modifier?habitation_id=' . $habitation_id);
         } else {
             Flight::redirect('/modifier?habitation_id=' . $habitation_id);
+        }
+    }
+    public function supprimerHabitation(){
+        $this->model = new AdminModel(Flight::db());
+        $id = Flight::request()->data->habitation_id ?? null;
+        if ($this->model->supprimerHabitation($id)) {
+            Flight::redirect('/admin');
+        } else {
+            Flight::redirect('/admin');
         }
     }
 }

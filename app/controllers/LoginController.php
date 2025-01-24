@@ -40,6 +40,7 @@ class LoginController
             Flight::render('login', ['message' => 'Identifiants incorrects']);
         }
     }
+    // Mahery Code
 
     public function afficherLoginAdmin(){
         Flight::render('loginAdmin');

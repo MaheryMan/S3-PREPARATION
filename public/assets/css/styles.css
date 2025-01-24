@@ -7,10 +7,12 @@
 
 .header {
   min-height: 100vh;
+  min-height: 80%;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url(/assets/images/templates/banner.png);
   background-position: cover;
+  background-position: top;
 }
 
 nav {
@@ -18,6 +20,10 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 20px 7%;
+}
+
+a {
+  text-decoration: none;
 }
 
 .logo {
@@ -675,6 +681,14 @@ nav.navbar-white .fa-bars {
   flex-wrap: wrap;
   align-items: center;
   padding: 10px 50px;
+  margin: 30px 0 !important;
+  background: #fff !important;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  padding: 10px 50px !important;
 }
 
 .check-form label {
@@ -693,6 +707,7 @@ nav.navbar-white .fa-bars {
 
 .check-form button {
   background: #ff5361;
+  background: #ff5361 !important;
   border: 0;
   outline: none;
   color: #fff;
@@ -843,4 +858,118 @@ nav.navbar-white .fa-bars {
   .contact-host {
     margin: 40px 0;
   }
+}
+
+.hotel-content .hotel-grid {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 300px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.hotel-content .hotel-grid .price small {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hotel-content .hotel-grid>div {
+  width: 110px;
+  position: absolute;
+  top: 0;
+  left: -110px;
+  padding: 10px;
+  background: #ff226f;
+  color: #fff;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.hotel-content .hotel-grid>div small {
+  display: block;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.hotel-content .hotel-grid>div span {
+  display: block;
+  font-size: 18px;
+}
+
+.hotel-content .hotel-grid .book-now {
+  position: absolute;
+  bottom: -47px;
+  right: 0;
+  color: #fff;
+  width: 120px;
+  padding: 7px 0;
+  background: #3c4146;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.hotel-content .hotel-grid .book-now :hover {
+  position: absolute;
+  bottom: -47px;
+  right: 0;
+  color: #fbf6f6;
+  width: 120px;
+  padding: 7px 0;
+  background: #3c4146;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+
+.hotel-content .hotel-grid .book-now:hover,
+.hotel-content .hotel-grid .book-now:focus {
+  color: #fff !important;
+}
+
+.hotel-content .desc {
+  border: 1px solid #e6e6e6;
+  border-top: 0;
+  padding: 20px;
+  margin-bottom: 40px;
+  -webkit-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
+}
+
+@media screen and (max-width: 992px) {
+  .hotel-content .desc {
+    margin-bottom: 40px;
+  }
+}
+
+.hotel-content .desc h3 {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}
+
+.hotel-content .desc h3 a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.hotel-content:hover .hotel-grid>div,
+.hotel-content:focus .hotel-grid>div {
+  left: 0;
+}
+
+.hotel-content:hover .hotel-grid .book-now,
+.hotel-content:focus .hotel-grid .book-now {
+  bottom: 0;
+}
+
+.hotel-content:hover .desc,
+.hotel-content:focus .desc {
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.06);
+  -ms-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.06);
+  -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.06);
 }

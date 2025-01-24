@@ -1,3 +1,26 @@
+<?php
+
+$status = isset($_GET['status']) ? $_GET['status'] : null;
+
+if ($status == 'available') { ?>
+  <script>
+    window.alert("L'habitation est disponible.")
+  </script>
+<?php } elseif ($status == 'unavailable') { ?>
+  <script>
+    window.alert("L'habitation n'est pas disponible pour les dates sélectionnées.")
+  </script>
+<?php } elseif ($status == 'reserved') { ?>
+  <script>
+    window.alert("Votre réservation a été confirmée avec succès.")
+  </script>
+
+<?php } elseif ($status == 'error') { ?>
+  <script>
+    window.alert("Une erreur s'est produite lors de la réservation. Veuillez réessayer.")
+  </script>
+
+<?php } ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,20 +28,27 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>House Details Page - Designed by Aryan</title>
-  <link rel="icon" href="./assets/images/logo.png" />
-  <link rel="stylesheet" href="./assets/styles.css" />
+  <title>Stay B&B</title>
+  <link rel="icon" href="<?= BASE_URL ?>/public/assets/images/templates/logo.png" />
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/styles.css" />
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/themify-icons.css" />
+  <!-- Themify Icons -->
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/themify-icons.css">
+  <!-- Flat Icon -->
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/flaticon.css">
+  <!-- Icomoon -->
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/icomoon.css">
   <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
   <nav id="navBar" class="navbar-white">
-    <a href="#"><img src="./assets/images/logo-red.png" class="logo" /></a>
+    <a href="#"><img src="<?= BASE_URL ?>/public/assets/images/templates/logo-red.png" class="logo" /></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="house.html" class="active">Travel Outside</a></li>
-      <li><a href="listing.html">All Houses & Hostels</a></li>
+      <li><a href="<?= BASE_URL ?>/home">Home</a></li>
+      <li><a href="#">All Houses & Hostels</a></li>
+      <li><a href="#">Contact</a></li>
     </ul>
     <a href="" class="register-btn">Register Now</a>
     <i class="fas fa-bars" onclick="togglebtn()"></i>
@@ -26,7 +56,7 @@
 
   <div class="house-details">
     <div class="house-title">
-      <h1>Wenge House</h1>
+      <h1><?= $infoHabitat['type_habitation']; ?> à louer</h1>
       <div class="row">
         <div>
           <i class="fas fa-star"></i>
@@ -34,44 +64,45 @@
           <i class="fas fa-star"></i>
           <i class="fas fa-star-half-alt"></i>
           <i class="far fa-star"></i>
-          <span>245 Reviews</span>
+          <span><?php echo rand(100, 400) ?>Reviews</span>
         </div>
         <div>
-          <p>Location: San Francisco, California, United State</p>
+          <p>Location: <?= $infoHabitat['quartier']; ?></p>
         </div>
       </div>
     </div>
 
     <div class="gallery">
       <div class="gallery-img-1">
-        <img src="./assets/images/house-1.png" />
+        <img src="<?= BASE_URL ?>/public/assets/images/templates/<?= $infoHabitat['first_photo']; ?>" />
       </div>
-      <div><img src="./assets/images/house-2.png" /></div>
-      <div><img src="./assets/images/house-3.png" /></div>
-      <div><img src="./assets/images/house-4.png" /></div>
-      <div><img src="./assets/images/house-5.png" /></div>
+      <?php foreach ($otherPics as $photo) { ?>
+        <div><img src="<?= BASE_URL ?>/public/assets/images/templates/<?= $photo; ?>" /></div>
+      <?php } ?>
     </div>
 
     <div class="small-details">
-      <h2>Entire rental unit hosted by Brandon</h2>
-      <p>2 guest &nbsp; &nbsp; 2 beds &nbsp; &nbsp; 1 bathroom</p>
-      <h4>$ 100 / day</h4>
+      <h2><?= $infoHabitat['description']; ?></h2>
+      <p>2+ guest &nbsp; &nbsp; <?= $infoHabitat['nb_chambres']; ?> rooms &nbsp; &nbsp; 1 bathroom</p>
+      <h4>$ <?= $infoHabitat['loyer_jour']; ?> / day</h4>
     </div>
     <hr class="line" />
-    <form class="check-form">
+
+    <form action="<?= BASE_URL ?>/habitations/check" class="check-form" method="POST">
       <div>
         <label>Check-in</label>
-        <input type="text" placeholder="Add Date" />
+        <input type="date" name="startDate" placeholder="Add Date" required />
       </div>
       <div>
         <label>Check-out</label>
-        <input type="text" placeholder="Add Date" />
+        <input type="date" name="endDate" placeholder="Add Date" required />
+        <input type="hidden" name="idCheck" value="<?= $infoHabitat['habitation_id']; ?>" />
       </div>
       <div class="guest-field">
         <label>Guest</label>
         <input type="text" placeholder="2 guest" />
       </div>
-      <button type="submit">Check Availbility</button>
+      <button type="submit">Check Availability</button>
     </form>
 
     <ul class="details-list">
@@ -99,28 +130,10 @@
 
     <hr class="line" />
 
-    <p class="home-desc">
-      Guests will be allocated on the ground floor according to availability.
-      You get a comfortable Two bedroom apartment has a true city feeling. The
-      price quoted is for two guest, at the guest slot please mark the number
-      of guests to get the exact price for groups.
-    </p>
-    <hr class="line" />
-
-    <div class="map">
-      <h3>Location on map</h3>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21221.676224044128!2d-122.451917885570059!3d37.75203368896406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sin!4v1641145357317!5m2!1sen!2sin"
-        width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
-      <b>San Francisco, California, United States</b>
-      <p>It's like a home away from home.</p>
-    </div>
-    <hr class="line" />
-
     <div class="host">
-      <img src="./assets/images/host.png" />
+      <img src="<?= BASE_URL ?>/public/assets/images/templates/host.png" />
       <div>
-        <h2>Hosted by Elon Musk</h2>
+        <h2>Hosted by:ETU 3093 & ETU 3185</h2>
         <p>
           <span>
             <i class="fas fa-star"></i>

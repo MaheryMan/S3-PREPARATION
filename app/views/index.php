@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Staybnb - Designed by Aryan</title>
-  <link rel="icon" href="/assets/images/templates/logo.png" />
-  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <title>Stay B&B</title>
+  <link rel="icon" href="<?= BASE_URL ?>/public/assets/images/templates/logo.png" />
+  <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/styles.css" />
   <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
 </head>
 
@@ -15,11 +15,11 @@
 
   <div class="header">
     <nav id="navBar">
-      <a href=""><img src="/assets/images/templates/logo.png" class="logo" /></a>
+      <a href=""><img src="<?= BASE_URL ?>/public/assets/images/templates/logo.png" class="logo" /></a>
       <ul class="nav-links">
-        <li><a href="" class="active">Home</a></li>
-        <li><a href="house">Travel Outside</a></li>
-        <li><a href="listing">All Houses & Hostels</a></li>
+        <li><a href="/home" class="active">Home</a></li>
+        <li><a href="#">Travel Outside</a></li>
+        <li><a href="#">All Houses & Hostels</a></li>
 
       </ul>
       <a href="" class="register-btn">Register Now</a>
@@ -36,7 +36,7 @@
     <div class="exclusives">
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-1.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-1.png" />
         </a>
         <span>
           <h3>London</h3>
@@ -46,7 +46,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-2.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-2.png" />
         </a>
         <span>
           <h3>Paris</h3>
@@ -56,7 +56,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-3.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-3.png" />
         </a>
         <span>
           <h3>Japan</h3>
@@ -66,7 +66,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-4.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-4.png" />
         </a>
         <span>
           <h3>Kashmir</h3>
@@ -76,7 +76,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-5.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-5.png" />
         </a>
         <span>
           <h3>Paradis Island</h3>
@@ -86,7 +86,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-6.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-6.png" />
         </a>
         <span>
           <h3>Marley</h3>
@@ -96,7 +96,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-7.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-7.png" />
         </a>
         <span>
           <h3>Birmingham</h3>
@@ -106,7 +106,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-8.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-8.png" />
         </a>
         <span>
           <h3>Rajasthan</h3>
@@ -116,7 +116,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-9.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-9.png" />
         </a>
         <span>
           <h3>Kerrela</h3>
@@ -126,7 +126,7 @@
 
       <div>
         <a href="#">
-          <img src="/assets/images/templates/image-10.png" />
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/image-10.png" />
         </a>
         <span>
           <h3>Ukraine</h3>
@@ -137,23 +137,29 @@
     </div>
 
     <h2 class="sub-title">Trending Places</h2>
-    <div class="trending">
-      <div>
-        <img src="/assets/images/templates/dubai.png" />
-        <h3>Dubai</h3>
+    <div class="container">
+      <div class="trending">
+        <div>
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/dubai.png" />
+          <h3>Dubai</h3>
+        </div>
+        <div>
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/new-york.png" />
+          <h3>New York</h3>
+        </div>
+        <div>
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/paris.png" />
+          <h3>Paris</h3>
+        </div>
+        <div>
+          <img src="<?= BASE_URL ?>/public/assets/images/templates/new-delhi.png" />
+          <h3>New Delhi</h3>
+        </div>
+        <div class="viewmore">
+          <a href="<?= BASE_URL ?>/habitations/all"><button>View All</button></a>
+        </div>
       </div>
-      <div>
-        <img src="/assets/images/templates/new-york.png" />
-        <h3>New York</h3>
-      </div>
-      <div>
-        <img src="/assets/images/templates/paris.png" />
-        <h3>Paris</h3>
-      </div>
-      <div>
-        <img src="/assets/images/templates/new-delhi.png" />
-        <h3>New Delhi</h3>
-      </div>
+
     </div>
 
     <div class="cta">
@@ -171,15 +177,15 @@
     <h2 class="sub-title">Travellers Stories</h2>
     <div class="stories">
       <div>
-        <img src="/assets/images/templates/story-1.png" />
+        <img src="<?= BASE_URL ?>/public/assets/images/templates/story-1.png" />
         <p>Popular European countries with a budget of just $10,000</p>
       </div>
       <div>
-        <img src="/assets/images/templates/story-2.png" />
+        <img src="<?= BASE_URL ?>/public/assets/images/templates/story-2.png" />
         <p>Travelled more than 100 countries in less than a year</p>
       </div>
       <div>
-        <img src="/assets/images/templates/story-3.png" />
+        <img src="<?= BASE_URL ?>/public/assets/images/templates/story-3.png" />
         <p>Best experience you get while travelling to Thailand</p>
       </div>
     </div>

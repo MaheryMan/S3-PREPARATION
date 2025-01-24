@@ -34,6 +34,8 @@ $router = $app->router();
  * that will handle the request.
  */
 require('routes.php');
+define('BASE_URL', '/tezitraPR/t/AirbNb');
+
 /*
  * You additionally could just define the routes in this file. It's up to you.
  * Example:
@@ -56,7 +58,7 @@ require('routes.php');
  * service, or if you should create a new instance of the service every time you need it.
  * That's a discussion for another day. Suffice to say, that Flight has a basic concept
  * of a services container by registering classes to the Engine class.
- */ 
+ */
 require('services.php');
 
 // At this point, your app should have all the instructions it needs and it'll

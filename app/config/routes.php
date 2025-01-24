@@ -1,5 +1,6 @@
 <?php
 
+use app\controllers\HabitationController;
 use app\controllers\HomeController;
 use app\controllers\LoginController;
 use flight\Engine;
@@ -23,5 +24,10 @@ $router->get('/', [$loginController, 'afficherPage']);
 $router->post('/login', [$loginController, 'login']);
 $router->post('/register', [$loginController, 'inscription']);
 
-$router->post('/loginAdmin', [$loginController, 'loginAdminController']);
-$router->get('/adminForm', [$loginController, 'afficherLoginAdmin']);
+$Habitation_Controller = new HabitationController();
+$router->group('/habitations', function () use ($router, $Habitation_Controller) {
+	$router->get('/all', [$Habitation_Controller, 'showAllHabitation']);
+	$router->get('/book/@id', [$Habitation_Controller, 'bookHabitation']);
+	$router->post('/check', [$Habitation_Controller, 'checkAvailability']);
+	$router->post('/reserve', [$Habitation_Controller, 'reserveHabitation']);
+});
